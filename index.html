@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ahmad Fikri Afandi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --text-main: #2d3748;
+            --text-muted: #5a6778;
+            --accent: #2b6cb0;
+            --border-light: #e2e8f0;
+            --callout-bg: #f4f6f8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: var(--text-main);
+            background-color: #ffffff;
+            line-height: 1.65;
+            font-size: 16.5px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 840px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        /* Header & Navigation */
+        header {
+            text-align: center;
+            margin-bottom: 44px;
+        }
+
+        h1 {
+            font-weight: 300;
+            font-size: 2.6rem;
+            letter-spacing: -0.01em;
+            color: #1a202c;
+            margin-bottom: 14px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover {
+            color: #1a202c;
+        }
+
+        /* Bio Section */
+        .bio-grid {
+            display: grid;
+            grid-template-columns: 225px 1fr;
+            gap: 42px;
+            align-items: start;
+            margin-bottom: 52px;
+        }
+
+        .profile-photo {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: 2px;
+            background-color: #edf2f7;
+        }
+
+        .bio-text p {
+            margin-bottom: 16px;
+            color: var(--text-main);
+        }
+
+        .bio-text a {
+            color: var(--accent);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .bio-text a:hover {
+            color: #1a365d;
+        }
+
+        .note-muted {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        /* Section Divider */
+        .section-divider {
+            border-top: 1px solid var(--border-light);
+            padding-top: 26px;
+            margin-top: 44px;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .section-divider h2 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #1a202c;
+        }
+
+        /* Featured Writing Sample Box */
+        .featured-box {
+            background-color: var(--callout-bg);
+            border-left: 3.5px solid var(--accent);
+            padding: 20px 24px;
+            margin-bottom: 36px;
+        }
+
+        .featured-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .paper-title {
+            color: var(--accent);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            font-weight: 400;
+        }
+
+        .paper-title:hover {
+            color: #1a365d;
+        }
+
+        .paper-title-plain {
+            color: #1a202c;
+            font-weight: 400;
+        }
+
+        .paper-actions {
+            margin-top: 8px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .abstract-toggle {
+            background: none;
+            border: none;
+            padding: 0;
+            font: inherit;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .abstract-toggle:hover {
+            color: #1a202c;
+        }
+
+        .paper-actions a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .paper-actions a:hover {
+            color: #1a202c;
+            text-decoration: underline;
+        }
+
+        .abstract-content {
+            display: none;
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px solid #dce3ec;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            text-align: justify;
+        }
+
+        .abstract-content.open {
+            display: block;
+        }
+
+        /* Numbered Paper Lists */
+        h3.sub-heading {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #1a202c;
+            margin-top: 28px;
+            margin-bottom: 16px;
+        }
+
+        .paper-list {
+            list-style: none;
+        }
+
+        .paper-item {
+            display: grid;
+            grid-template-columns: 34px 1fr;
+            margin-bottom: 20px;
+        }
+
+        .paper-num {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .paper-meta {
+            font-size: 0.96rem;
+            color: var(--text-main);
+        }
+
+        .paper-venue {
+            font-style: italic;
+            color: var(--text-muted);
+        }
+
+        /* Projects / Experience Section */
+        .project-item {
+            margin-bottom: 20px;
+        }
+
+        .project-item p {
+            font-size: 0.96rem;
+            color: var(--text-main);
+            margin-top: 4px;
+        }
+
+        @media (max-width: 680px) {
+            .bio-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .profile-photo {
+                max-width: 210px;
+                margin: 0 auto;
+            }
+
+            h1 {
+                font-size: 2.1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- ================= HEADER & NAVIGATION ================= -->
+        <header>
+            <h1>Ahmad Fikri Afandi</h1>
+            <nav>
+                <a href="#research">Research</a>
+                <a href="#projects">Projects</a>
+                <a href="cv.pdf" target="_blank">CV</a>
+            </nav>
+        </header>
+
+        <!-- ================= BIO SECTION ================= -->
+        <section class="bio-grid">
+            <!-- Simpan foto portrait (rasio 4:5) di folder yang sama dengan nama photo.jpg -->
+            <img src="photo.jpg" alt="Profile Photo" class="profile-photo" />
+
+            <div class="bio-text">
+                <p>
+                    I am an undergraduate student in Development Economics at Sultan Ageng Tirtayasa University. My
+                    research focuses
+                    on monetary economics,
+                    macroeconomics, and empirical asset pricing.
+                </p>
+                <p>
+                    My current work uses granular institutional holdings data to study how offsetting portfolio
+                    adjustments between active and passive managers shape aggregate market stability after
+                    macro-financial shocks. Other related work examines how fiscal conditions and debt maturity shape
+                    U.S. inflation dynamics following monetary tightening under equilibrium-selection frameworks. In a
+                    second research agenda, I apply large language models to central bank communications to measure
+                    inflation narratives and asymmetric policy-rate responses.
+                </p>
+                <p>
+                    <strong>I am preparing to apply to PhD programs in economics for Fall 2028.</strong> Find a
+                    <a href="cv.pdf" target="_blank">PDF of my CV here</a>
+                <p>
+                    Email: <a href="mailto:your.email@domain.com">afandiahmadfikri@gmail.com</a>
+                </p>
+                <p class="note-muted">
+                    Please contact me if you have any challenges accessing materials listed on this page.
+                </p>
+            </div>
+        </section>
+
+        <!-- ================= RESEARCH SECTION ================= -->
+        <div id="research" class="section-divider">
+            <h2>Research</h2>
+        </div>
+
+        <!-- Kotak Sorotan Utama (Writing Sample) -->
+        <div class="featured-box">
+            <div class="featured-label">Writing Sample</div>
+            <div>
+                <a href="https://www.dropbox.com/scl/fi/z3wkioih09nk4hftvw285/Draft-Manuscript.pdf?rlkey=mkmbbn5j0b5jd1rddp1pcd6fh&st=ly0pjac9&dl=0"
+                    target="_blank" class="paper-title">
+                    Equilibrium Selection, Debt Maturity, and U.S. Inflation Dynamics
+                </a>
+            </div>
+            <div class="paper-actions">
+                <button class="abstract-toggle" onclick="toggleAbstract('abs-1')">
+                    Abstract <span id="arrow-abs-1">▾</span>
+                </button>
+                <a href="https://www.dropbox.com/scl/fi/z3wkioih09nk4hftvw285/Draft-Manuscript.pdf?rlkey=mkmbbn5j0b5jd1rddp1pcd6fh&st=79znz59v&dl=0"
+                    target="_blank">Paper Link</a>
+                <a href="#" target="_blank">Replication Code</a>
+            </div>
+            <div id="abs-1" class="abstract-content">
+                Can an equilibrium-selection framework better explain U.S. inflation dynamics following monetary
+                tightening than a traditional Taylor rule, and how do fiscal conditions shape this response? Using U.S.
+                quarterly data from 1990 to 2025 and high-frequency identified monetary policy shocks, this study
+                estimates impulse responses through local projections and evaluates the analytical inflation path
+                implied by Cochrane's equilibrium-selection framework against a traditional Taylor rule with
+                autoregressive disturbances. The results reveal a short-run price puzzle and show that the
+                equilibrium-selection framework better reproduces the initial inflation response. Further analysis
+                identifies complementary fiscal channels: stronger primary surpluses are associated with a lower
+                immediate inflation response, whereas a higher share of long-term government debt is associated with
+                stronger disinflation over the medium term. These findings highlight the importance of fiscal conditions
+                in monetary policy transmission.
+            </div>
+        </div>
+        <!-- Sub-bagian 1: Publications -->
+        <h3 class="sub-heading">Publications</h3>
+        <ul class="paper-list">
+            <li class="paper-item">
+                <span class="paper-num">[1]</span>
+                <div class="paper-meta">
+                    <a href="https://www.dropbox.com/scl/fi/fuli1obo0ar3kg7kyt8a5/BMEB_Final_Manuscript_Ahmad_Fikri.pdf?rlkey=0yntefqjo4idbep4uc3jtnay6&st=u4upj223&dl=0"
+                        target="_blank" class="paper-title">
+                        Forecasting Indonesia’s Inflation Using Machine Learning: A Policy-Oriented Comparison with
+                        Traditional Models
+                    </a><br />
+                    <span class="paper-venue">Forthcoming, Bulletin of Monetary Economics and Banking</span>
+                    <div class="paper-actions">
+                        <button class="abstract-toggle" onclick="toggleAbstract('abs-pub-1')">
+                            Abstract <span id="arrow-abs-pub-1">▾</span>
+                        </button>
+                        <a href="https://www.dropbox.com/scl/fi/fuli1obo0ar3kg7kyt8a5/BMEB_Final_Manuscript_Ahmad_Fikri.pdf?rlkey=0yntefqjo4idbep4uc3jtnay6&st=u4upj223&dl=0"
+                            target="_blank">Paper Link</a>
+                    </div>
+                    <div id="abs-pub-1" class="abstract-content">
+                        The aim of the paper is to evaluate the predictive precision of deep learning architectures
+                        against robust econometric frameworks for forecasting Indonesia's inflation. By using the
+                        Narayan and Popp (2010) structural break test and the Westerlund and Narayan (WN) framework, the
+                        study finds that the Multivariate LSTM model significantly outperforms traditional ARIMA,
+                        ARIMAX, and robust linear benchmarks. Further, the results also confirm the LSTM's unique
+                        ability to internalize non-linear "pass-through" effects from global energy shocks. Thus, the
+                        implementation of this autonomous early-warning system provides critical insights for Bank
+                        Indonesia in calibrating monetary policy amidst macroeconomic instability.
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <!-- Sub-bagian 1: Working Papers / Under Review -->
+        <h3 class="sub-heading">Working Papers</h3>
+        <ul class="paper-list">
+
+            <!-- Working Paper 1 -->
+            <li class="paper-item">
+                <span class="paper-num">[1]</span>
+                <div class="paper-meta">
+                    <a href="https://www.dropbox.com/scl/fi/z3wkioih09nk4hftvw285/Draft-Manuscript.pdf?rlkey=mkmbbn5j0b5jd1rddp1pcd6fh&st=ly0pjac9&dl=0"
+                        target="_blank" class="paper-title">Equilibrium Selection, Debt Maturity,
+                        and U.S. Inflation Dynamics</a><br />
+                    <span class="paper-venue">Under Review, Latin American Journal of Central Banking</span>
+                    <div class="paper-actions">
+                        <button class="abstract-toggle" style="color: var(--accent);"
+                            onclick="toggleAbstract('abs-wp-1')">
+                            Abstract <span id="arrow-abs-wp-1">▾</span>
+                        </button>
+                        <a href="https://www.dropbox.com/scl/fi/z3wkioih09nk4hftvw285/Draft-Manuscript.pdf?rlkey=mkmbbn5j0b5jd1rddp1pcd6fh&st=ly0pjac9&dl=0"
+                            target="_blank">Paper Link</a>
+                    </div>
+                    <div id="abs-wp-1" class="abstract-content">
+                        Can an equilibrium-selection framework better explain U.S. inflation dynamics following monetary
+                        tightening than a traditional Taylor rule, and how do fiscal conditions shape this response?
+                        Using U.S. quarterly data from 1990 to 2025 and high-frequency identified monetary policy
+                        shocks, this study estimates impulse responses through local projections and evaluates the
+                        analytical inflation path implied by Cochrane's equilibrium-selection framework against a
+                        traditional Taylor rule with autoregressive disturbances. The results reveal a short-run price
+                        puzzle and show that the equilibrium-selection framework better reproduces the initial inflation
+                        response. Further analysis identifies complementary fiscal channels: stronger primary surpluses
+                        are associated with a lower immediate inflation response, whereas a higher share of long-term
+                        government debt is associated with stronger disinflation over the medium term. These findings
+                        highlight the importance of fiscal conditions in monetary policy transmission.
+                    </div>
+                </div>
+            </li>
+
+            <!-- Working Paper 2 -->
+            <li class="paper-item">
+                <span class="paper-num">[2]</span>
+                <div class="paper-meta">
+                    <a href="[Link Paper 2]" target="_blank" class="paper-title">Aggregate Inertia and Heterogeneous
+                        Institutional Rebalancing: Evidence from Macro-Financial Shocks</a><br />
+                    <span class="paper-venue">Under Review, Bulletin of Monetary Economics and Banking</span>
+                    <div class="paper-actions">
+                        <button class="abstract-toggle" style="color: var(--accent);"
+                            onclick="toggleAbstract('abs-wp-2')">
+                            Abstract <span id="arrow-abs-wp-2">▾</span>
+                        </button>
+                    </div>
+                    <div id="abs-wp-2" class="abstract-content">
+                        We study how institutional investors rebalance equity portfolios after macro-financial shocks.
+                        Using granular holdings data at the manager–stock–quarter level from 2015Q1 to 2025Q4, we
+                        estimate dynamic responses of returns and portfolio-weight changes to shifts in the Federal
+                        Funds Rate, economic policy uncertainty, and market volatility. While stock returns respond
+                        strongly, aggregate portfolio weights show little adjustment. This apparent stability masks a
+                        systematic offsetting-rebalancing mechanism beneath the aggregate surface, where active and
+                        passive managers adjust their portfolios in opposite directions, leaving the net aggregate
+                        quantity response statistically indistinguishable from zero. Our results point to an aggregate
+                        illusion, demonstrating that macro-level market stability coexists with and is inherently
+                        insulated by heterogeneous portfolio adjustments across competing institutional investor
+                        mandates.
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+
+        <!-- Sub-bagian 2: Work in Progress -->
+        <h3 class="sub-heading">Works in Progress</h3>
+        <ul class="paper-list">
+            <li class="paper-item">
+                <span class="paper-num">[1]</span>
+                <div class="paper-meta">
+                    <span class="paper-title-plain">Inside Bank Indonesia: Inflation Narratives, Beliefs, and Asymmetric
+                        Policy Responses</span><br />
+                    with <a href="https://scholar.google.com/citations?user=MsFOIyEAAAAJ&hl=en" target="_blank"
+                        class="coauthor-link">Cep Jandi Anwar</a>
+                    <div class="paper-actions">
+                        <button class="abstract-toggle" style="color: var(--accent);"
+                            onclick="toggleAbstract('abs-wip-1')">
+                            Abstract <span id="arrow-abs-wip-1">▾</span>
+                        </button>
+                    </div>
+                    <div id="abs-wip-1" class="abstract-content">
+                        Does Bank Indonesia respond symmetrically to demand- and supply-related inflation pressures? We
+                        analyze 233 monetary policy documents from November 2005 to September 2026 to construct monthly
+                        measures of policymakers' economic assessments using a two-stage large language model framework.
+                        We find no statistically significant asymmetry between demand and supply narratives in the full
+                        sample. However, following the August 2016 introduction of the BI 7-Day Reverse Repo Rate,
+                        monetary policy responses become asymmetric: demand narratives are positively and significantly
+                        associated with policy-rate adjustments, while supply narratives remain insignificant.
+                        Inflation-expectations narratives also become significantly associated with policy-rate
+                        adjustments during this period. These findings remain robust across alternative specifications,
+                        breakpoint tests, and wild bootstrap inference.
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <!-- ================= PROJECTS / SOFTWARE SECTION ================= -->
+        <div id="projects" class="section-divider">
+            <h2>Projects &amp; Software</h2>
+        </div>
+
+        <div class="project-item">
+            <a href="https://datamintai.tech" target="_blank" class="paper-title">DataMint</a>
+            <span class="paper-venue"> — Creator &amp; Lead Developer (2026)</span>
+            <p>
+                An AI-assisted macroeconomic data synthesis platform designed to retrieve, harmonize, and export
+                multi-frequency time-series datasets across institutional registries including FRED, IMF, World Bank
+                WDI, Bank Indonesia, and BPS. Engineered natural-language query parsing, automated calendar-date and
+                frequency alignment, interactive cross-country visualizers, and scheduled data-monitoring pipelines into
+                analysis-ready tabular formats.
+            </p>
+        </div>
+
+        <script>
+            function toggleAbstract(id) {
+                const box = document.getElementById(id);
+                const arrow = document.getElementById('arrow-' + id);
+                if (box.classList.contains('open')) {
+                    box.classList.remove('open');
+                    arrow.textContent = '▾';
+                } else {
+                    box.classList.add('open');
+                    arrow.textContent = '▴';
+                }
+            }
+        </script>
+</body>
+
+</html>
